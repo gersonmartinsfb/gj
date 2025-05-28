@@ -15,4 +15,4 @@ lint:
 build:
 	go mod tidy
 	go mod vendor
-	go build -o bin/cli cmd/main.go
+	go build -o bin/gj cmd/main.go
