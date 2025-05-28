@@ -31,10 +31,12 @@ func (cb *CreateBranch) CreateBranch(issueType string, issueID string) error {
 	}
 
 	if cb.createBranch {
+		fmt.Println("Creating branch:", branchName)
 		cmd := exec.Command("git", "checkout", "-b", branchName)
 		if err := cmd.Run(); err != nil {
 			return err
 		}
+		fmt.Println("Branch created successfully:", branchName)
 	} else {
 		fmt.Println("git checkout -b", branchName)
 	}
@@ -62,6 +64,9 @@ func (cb *CreateBranch) getIssueDescription(issueID string) (string, error) {
 }
 
 func (cb *CreateBranch) removeCharacters(s string) string {
+	// Replace special characters with their ASCII equivalents
+	s = replaceSpecialChars(s)
+
 	// Convert to lowercase
 	s = strings.ToLower(s)
 
@@ -82,4 +87,31 @@ func (cb *CreateBranch) removeCharacters(s string) string {
 	}
 
 	return result
+}
+
+func replaceSpecialChars(s string) string {
+	replacer := strings.NewReplacer(
+		"ç", "c",
+		"â", "a",
+		"ã", "a",
+		"ô", "o",
+		"õ", "o",
+		"ó", "o",
+		"é", "e",
+		"í", "i",
+		"á", "a",
+		"ú", "u",
+		"à", "a",
+		"Ç", "C",
+		"Â", "A",
+		"Ã", "A",
+		"Ô", "O",
+		"Õ", "O",
+		"Ó", "O",
+		"É", "E",
+		"Í", "I",
+		"Á", "A",
+		"Ú", "U",
+	)
+	return replacer.Replace(s)
 }

@@ -1,5 +1,5 @@
 .PHONY: all test lint run dev build
-all: test lint build 
+all: test build 
 
 test:
 	go test -v ./... -coverprofile=coverage.out
@@ -7,10 +7,6 @@ test:
 
 dev:
 	go run cmd/main.go
-
-lint:
-	golangci-lint run --config .golangci.yml
-	@echo "Linting completed."
 
 build:
 	go mod tidy

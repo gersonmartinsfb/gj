@@ -27,11 +27,10 @@ export PATH=$PATH:$HOME/bin # <- colocar esse no .bashrc ou .zhrc ou equivalente
 ## Uso
 
 ```bash
-Usage: gj [--disable-branch|-d] <type> <issue-number>
+Usage: gj [--disable-creation] <type> <issue-number>
 Options:
-        type: The type of issue (bug, feat, hotfix, enhance)
-        issue-number: The issue number to create a branch for. Just the number. The suffix QUANT- will be added automatically.
-  -d    Disable branch creation (shorthand)
-  -disable-branch
-        Disable branch creation
+  type: The type of issue (bug, feat, hotfix, enhance)
+  issue-number: The issue number to create a branch for. Just the number. The suffix QUANT- will be added automatically.
+  -disable-creation
+        Disable branch creation and just print the command that would be run
 ```        
