@@ -8,7 +8,13 @@ test:
 dev:
 	go run cmd/main.go
 
-build:
+clean:
+	rm -rf bin
+	rm -f coverage.out
+	rm -f coverage.html
+
+build: clean
+	@mkdir -p bin
 	go mod tidy
 	go mod vendor
 	go build -o bin/gj cmd/main.go

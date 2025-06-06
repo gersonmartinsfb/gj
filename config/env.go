@@ -14,6 +14,7 @@ type EnvT struct {
 	JiraIssuePrefix string
 	CreateBranch    bool
 	MaxLength       int
+	GeminiKey       string
 }
 
 var Env EnvT
@@ -34,6 +35,7 @@ func Load() {
 		JiraIssuePrefix: prefix,
 		CreateBranch:    true,
 		MaxLength:       50, // Default max length for branch names
+		GeminiKey:       mustGetEnv("GOOGLE_API_KEY"),
 	}
 }
 

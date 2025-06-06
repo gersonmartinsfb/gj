@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/gersonmartinsfb/gj/adapters/jira"
+	"github.com/gersonmartinsfb/gj/app/translate"
 	"github.com/gersonmartinsfb/gj/config"
 )
 
@@ -13,6 +14,7 @@ type CreateBranch struct {
 	adapter      *jira.Request
 	createBranch bool
 	maxLength    int
+	translator   *translate.Translate
 }
 
 func NewCreateBranch() *CreateBranch {
@@ -21,6 +23,7 @@ func NewCreateBranch() *CreateBranch {
 		adapter:      jira.NewRequest(config.JiraDomain, config.JiraUser, config.JiraToken, config.JiraIssuePrefix),
 		createBranch: config.CreateBranch,
 		maxLength:    config.MaxLength,
+		translator:   translate.NewTranslate(),
 	}
 }
 
@@ -48,6 +51,11 @@ func (cb *CreateBranch) getBranchName(issueType string, issueID string) (string,
 	description, err := cb.getIssueDescription(issueID)
 	if err != nil {
 		return "", err
+	}
+
+	description, err = cb.translator.TranslateText(description)
+	if err != nil {
+		return "", fmt.Errorf("error translating issue description: %w", err)
 	}
 
 	branchName := cb.removeCharacters(description)
