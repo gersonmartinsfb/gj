@@ -2,6 +2,7 @@ package createbranch
 
 import (
 	"fmt"
+	"log"
 	"os/exec"
 	"strings"
 
@@ -53,12 +54,18 @@ func (cb *CreateBranch) getBranchName(issueType string, issueID string) (string,
 		return "", err
 	}
 
+	log.Default().Println("Issue description:", description)
+
 	description, err = cb.translator.TranslateText(description)
 	if err != nil {
 		return "", fmt.Errorf("error translating issue description: %w", err)
 	}
 
+	log.Default().Println("Translated description:", description)
+
 	branchName := cb.removeCharacters(description)
+
+	log.Default().Println("Branch name after processing:", branchName)
 
 	return fmt.Sprintf("%s/%s-%s/%s", issueType, config.Env.JiraIssuePrefix, issueID, branchName), nil
 }

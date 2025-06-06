@@ -21,9 +21,16 @@ func (t *Translate) TranslateText(text string) (string, error) {
 
 Follow these rules:
 
-If the text begins with a word enclosed in brackets (e.g., [TAG]), that word and the brackets must be ignored.
-The final translated text cannot be more than 50 characters long.
-If necessary, use common abbreviations to meet the character limit:
+1. If the text begins with a word enclosed in brackets (e.g., [TAG]), that word and the brackets must be ignored.
+2. The final translated text cannot be more than 70 characters long.
+3. If necessary, use common abbreviations to meet the character limit
+4. The translated text should be concise and clear, suitable for a Jira card title
+5. Do not include any additional text or explanations, just the translated text
+6. Do not include any special characters, emojis, or punctuation marks in the translated text 
+7. Do not include any new lines, tabs, or extra spaces in the translated text
+8. Try to translate all the text, but if it is not possible to translate all the text, just translate the most important part of the text
+9. Do not replace 'and' word by '&' or 'and' by 'n', just translate the text as it is
+10. If the text is already in English, return it as is
 ---
 ` + text
 	translatedText, err := t.adapter.GetContentFromPrompt(prompt)
