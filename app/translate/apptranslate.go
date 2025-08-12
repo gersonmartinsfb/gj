@@ -22,7 +22,7 @@ func (t *Translate) TranslateText(text string) (string, error) {
 Follow these rules:
 
 1. If the text begins with a word enclosed in brackets (e.g., [TAG]), that word and the brackets must be ignored.
-2. The final translated text cannot be more than 70 characters long.
+2. The final translated text cannot be more than 100 characters long.
 3. If necessary, use common abbreviations to meet the character limit
 4. The translated text should be concise and clear, suitable for a Jira card title
 5. Do not include any additional text or explanations, just the translated text
